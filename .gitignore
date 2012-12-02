@@ -1,0 +1,8 @@
+# Backups and operating system files
+*~
+.DS_Store
+
+
+# PDF output
+*.pdf
+*.PDF
