@@ -1,0 +1,119 @@
+/* Generic fonts and boxmodel */
+/* Portions adapted from https://github.com/Simbul/baker/blob/master/books/a-study-in-scarlet/css/book.css Copyright (C) 2011 by Davide S. Casali <folletto AT gmail DOT com> */
+
+@media print {
+    body {
+	font-family: Baskerville, Baskervald, Garamond, serif;
+	font-size: 12px;
+    }
+    h1, h2, h3, h4, h5, h6 {
+	font-family: Optima, sans-serif;
+	font-weight: normal;
+	border: 0;
+	margin: 0;
+	padding: 0;
+    }
+    a {
+	color: #000;
+	text-decoration: underline;
+    }
+}
+
+@media screen {
+    body {
+	/* font-family: Verdana, Helvetica, Arial, sans-serif; */
+	font-family: Baskerville, Baskervald, "Gentium Book Basic", "Gentium Basic", "Gentium", serif;
+	font-size: 140%;
+	background: #fff;
+	font-color: #000;
+	margin: 0;
+	padding: 0;
+    }
+
+    a {
+	color: #69f;
+    }
+
+    p, ul, ol {
+	font-size: 100%;
+	line-height: 170%;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+	/* font-family: Baskerville, Baskervald, serif; */
+	font-family: Optima, Verdana, Helvetica, Arial, sans-serif; 
+	font-weight: normal
+	text-align: left;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 150%;
+    }
+
+    h1 {
+	border-bottom: 2px solid #f69;
+	color: #f69;
+	font-size: 250%;
+	height: 250%;
+	position: relative;
+    }	
+    h2 {
+	color: #9f6
+	font-size: 200%;
+	height: 200%;
+	margin: 8px 0 2px;
+	padding: 5px 0 2px;
+    }
+
+    section div.container > p {
+	text-align: justify;
+	max-width: 550px; /* adjust to be 50-60 characters */
+	margin-left: auto;
+	margin-right: auto;
+    }
+}
+
+table.data {
+    border-collapse: collapse;
+}
+table.data caption {
+    font-size: larger;
+    margin: 1em auto;
+}
+table.data colgroup {
+    align: center;
+    valign: middle;
+}
+table.data thead {
+    align: center;
+    valign: middle;
+    background: inherit;
+    border-top: 2px solid #000;
+    border-bottom: 1px solid #000;
+    font-weight: bold;
+}
+table.data tfoot {
+    align: center;
+    valign: middle;
+}
+table.data tbody {
+    align: center;
+    valign: middle;
+}
+tbody tr:nth-child(odd) {
+    background: #ccc;
+}
+tbody tr:nth-child(even) {
+    background: inherit;
+}
+tr:last-child {
+    border-bottom: 1px solid #000;
+}
+table.data < th {
+    align: center;
+    valign: middle;
+    padding: .65em;
+}
+table.data < td {
+    padding: .65em;
+}

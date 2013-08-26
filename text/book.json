@@ -1,0 +1,32 @@
+{
+  "hpub": 1,
+  "title": "Representing Mechanics in Modeling Physics",
+  "author": ["Brian Vancil"],
+  "creator": ["Brian Vancil"],
+  "publisher": "",
+  "date": "2013-08-24",
+  "url": "book://raw.github.com/bvancil/modphys-etext/text/",
+  "cover": "assets/cover.png",
+
+  "orientation": "both",
+  "zoomable": true,
+
+  "-baker-background": "#000000",
+  "-baker-vertical-bounce": true,
+  "-baker-index-bounce": true,
+  "-baker-index-height": 150,
+  "-baker-media-autoplay": true,
+
+  "-treesaver-loopArticles": "true",
+
+  "contents": [
+    "00 Cover.html",
+    "01 Table of contents.html",
+    "02 Data representations.html",
+    "03 Interaction representations.html",
+    "04 Energy representations.html",
+    "05 Kinematic representations.html",
+    "06 Momentum representations.html",
+    "07 Force representations.html",
+  ]
+}
