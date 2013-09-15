@@ -24,14 +24,25 @@ Template:	Prologue 1.0 by HTML5 UP
     <!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
     <!--[if lte IE 8]><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
     <link rel="stylesheet" href="style/base.css" />
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       tex2jax: {
+         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+         processEscapes: true
+       }
+     });
+    </script>
     <script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <style type="text/css">
-     #posttable1 {
-       visiblility: hidden;
-     }
-    </style>
-    <script type="text/javascript">
      
+    </style>
+    <script src="script/base.js"></script>
+    <script type="text/javascript">
+     $(document).ready(function(){
+       // setupVisibilityToggle defined in base.js
+       setupVisibilityToggle("table1");
+       setupVisibilityToggle("table2");
+     });
     </script>
   </head>
   <body>
@@ -123,7 +134,7 @@ Template:	Prologue 1.0 by HTML5 UP
           
           <p>Want to see some really silly data?  Yup, it's bad, and here it is.</p>
           <table class="data">
-            <caption>What's up with this?</caption>
+            <caption>Table 1: What's up with this?</caption>
             <tbody>
               <tr>
                 <td>55</td>
@@ -162,65 +173,69 @@ Template:	Prologue 1.0 by HTML5 UP
               </tr>
             </tbody>
           </table>
-          <p>What's wrong with it?  Take a moment to come up with some ideas.  When you do, <a href="javascript:$(\"#posttable1\").toggle()" class="button scrolly">click to continue.</a></p>
+          <p class="question">What's wrong with it?  Take a moment to come up with some ideas.  When you do, <a id="table1Q" href="#" class="button">click to continue.</a></p>
 
-          <div id="posttable1">
-          <table class="data">
-            <caption>Data for round trips from Lawrence, KS to Sumner Academy of Arts &amp; Science driven at different maximum speeds.</caption>
-            <colgroup />
-            <colgroup />
-            <colgroup />
-            <colgroup />
-            <colgroup />
-            <thead>
-              <tr>
-                <th scope="col">Maximum speed / mi/h</th>
-                <th scope="col">Distance driven / mi</th>
-                <th scope="col">Gasoline used / gal</th>
-                <th scope="col">Gas mileage / mi/gal</th>
-                <th scope="col">Mile gasage / gal/100mi</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>55</td>
-                <td>85.1</td>
-                <td>1.826</td>
-                <td>46.6</td>
-                <td>2.15</td>
-              </tr>
-              <tr>
-                <td>60</td>
-                <td>85</td>
-                <td>2.156</td>
-                <td>39.4</td>
-                <td>2.54</td>
-              </tr>
-              <tr>
-                <td>65</td>
-                <td>84</td>
-                <td>2.298</td>
-                <td>36.6</td>
-                <td>2.74</td>
-              </tr>
-              <tr>
-                <td>70</td>
-                <td>83.9</td>
-                <td>2.678</td>
-                <td>31.3</td>
-                <td>3.19</td>
-              </tr>
-              <tr>
-                <td>75</td>
-                <td>84.3</td>
-                <td>3.065</td>
-                <td>27.5</td>
-                <td>3.64</td>
-              </tr>
-            </tbody>
-          </table>
-
-
+          <div id="table1A" class="container,initiallyhidden">
+            <p class="answer">We have no idea what these numbers mean, either what they describe or in what units they are measured.  Even more, we have no idea how they are related.  The following is a better way of constructing such a table.</p>
+            <table class="data">
+              <caption>Table 2: Data for round trips from Lawrence, KS to Sumner Academy of Arts &amp; Science driven at different maximum speeds.</caption>
+              <colgroup />
+              <colgroup />
+              <colgroup />
+              <colgroup />
+              <colgroup />
+              <thead>
+                <tr>
+                  <th scope="col">Maximum speed <span class="solidus">/</span> mi/h</th>
+                  <th scope="col">Distance driven <span class="solidus">/</span> mi</th>
+                  <th scope="col">Gasoline used <span class="solidus">/</span> gal</th>
+                  <th scope="col">Gas mileage <span class="solidus">/</span> mi/gal</th>
+                  <th scope="col">Mile gasage <span class="solidus">/</span> gal/100mi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>55</td>
+                  <td>85.1</td>
+                  <td>1.826</td>
+                  <td>46.6</td>
+                  <td>2.15</td>
+                </tr>
+                <tr>
+                  <td>60</td>
+                  <td>85</td>
+                  <td>2.156</td>
+                  <td>39.4</td>
+                  <td>2.54</td>
+                </tr>
+                <tr>
+                  <td>65</td>
+                  <td>84</td>
+                  <td>2.298</td>
+                  <td>36.6</td>
+                  <td>2.74</td>
+                </tr>
+                <tr>
+                  <td>70</td>
+                  <td>83.9</td>
+                  <td>2.678</td>
+                  <td>31.3</td>
+                  <td>3.19</td>
+                </tr>
+                <tr>
+                  <td>75</td>
+                  <td>84.3</td>
+                  <td>3.065</td>
+                  <td>27.5</td>
+                  <td>3.64</td>
+                </tr>
+              </tbody>
+            </table>
+            
+            <p class="question">Do you have any critiques of this?  Take a moment to come up with some ideas.  When you do, <a id="table2Q" href="#" class="button">click to continue.</a></p>
+            <div id="table2A" class="container,initiallyhidden">
+              <p class="answer">Since you've learned about uncertainty, you may wonder why it wasn't listed.  Also, the numbers are not written to the same precision.  I know that my spedometer is as much as 2 mph off, and the "<span class="keyword" title="smallest division reported by the measuring instrument">least count"</span> on my odometer is 0.1 miles.</p>
+            </div>
           </div>
 	  <footer>
 	  </footer>
@@ -252,7 +267,7 @@ Template:	Prologue 1.0 by HTML5 UP
       </section>
 
       <!-- Linearizing Graphs -->
-      <section id="Linearizing graphs" class="six">
+      <section id="linearizinggraphs" class="six">
 	<div class="container">
 
 	  <header>

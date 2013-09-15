@@ -38,6 +38,13 @@
 	font-size: 100%;
 	line-height: 170%;
     }
+
+    p { /* These settings are here to improve readability. */
+	text-align: justify;
+	max-width: 550px; /* adjust to be 50-60 characters */
+	margin-left: auto;
+	margin-right: auto;
+    }
     
     h1, h2, h3, h4, h5, h6 {
 	/* font-family: Baskerville, Baskervald, serif; */
@@ -71,7 +78,12 @@
 	margin-left: auto;
 	margin-right: auto;
     }
+
+    .initiallyhidden {
+	display:none;
+    }
 }
+
 
 table.data {
     border-collapse: collapse;
@@ -101,10 +113,13 @@ table.data tbody {
     valign: middle;
 }
 tbody tr:nth-child(odd) {
-    background: #ccc;
+    background: #c0c0c0;
 }
 tbody tr:nth-child(even) {
     background: inherit;
+}
+tr:first-child {
+    border-top: 1px solid #000;
 }
 tr:last-child {
     border-bottom: 1px solid #000;
@@ -116,4 +131,27 @@ table.data < th {
 }
 table.data < td {
     padding: .65em;
+}
+.solidus {
+    font-size: 120%;
+    color: #4169E1; /* royal blue (web) */
+}
+.bigletter {
+    font-size: 300%;
+    color: #CC5500;
+}
+/* In-text questions and answers:
+   For a text-feature with a short name of "xyz", the id on the answer-toggling button is "xyzQ" and the id on the part to be shown is "xyzA", usually a "div.container", which has class "initiallyhidden".
+   To indicate these question/answer self-questioning features, we use the classes "question" and "answer". The class "question" contains the full question, but the class "answer" only contains the specific answer to the question, not necessarily everything that needs to be shown later." */
+.question {
+    border-left: thick solid #CC5500;
+}
+.question:before {
+    /* This is set by JavaScript, since we want html, not text. */
+}
+.answer {
+    border-left: thick solid #C0C0C0;
+}
+.answer: before {
+    /* This is set by JavaScript, since we want html, not text. */
 }
