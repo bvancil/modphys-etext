@@ -4,7 +4,7 @@
 var setupVisibilityToggle = function(textFeature) {
     var idQ = "#"+textFeature+"Q";
     var idA = "#"+textFeature+"A";
-    $(idA).hide(); // This should already be done within CSS.
+    //$(idA).hide(); // This should already be done within CSS.
     $(idQ).click(function(e){
 	e.preventDefault(); // This keeps clicking the link from scrolling to the top of the page.
 	$(idA).slideToggle(); // Show the part of the page with question spoilers.

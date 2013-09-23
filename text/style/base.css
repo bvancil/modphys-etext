@@ -46,6 +46,10 @@
 	margin-right: auto;
     }
     
+    body { /* More text-contrast needed */
+	color: #000;
+    }
+
     h1, h2, h3, h4, h5, h6 {
 	/* font-family: Baskerville, Baskervald, serif; */
 	font-family: Optima, Verdana, Helvetica, Arial, sans-serif; 
@@ -80,7 +84,7 @@
     }
 
     .initiallyhidden {
-	display:none;
+	/*display:none; /* comment out this line while debugging */
     }
 }
 
@@ -154,4 +158,11 @@ table.data < td {
 }
 .answer: before {
     /* This is set by JavaScript, since we want html, not text. */
+}
+dt {
+    font-weight: bold;
+}
+.todo {
+    background-color: yellow;
+    border: 5px solid red;
 }

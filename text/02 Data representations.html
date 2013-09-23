@@ -26,6 +26,7 @@ Template:	Prologue 1.0 by HTML5 UP
     <link rel="stylesheet" href="style/base.css" />
     <script type="text/x-mathjax-config">
      MathJax.Hub.Config({
+       TeX: { equationNumbers: {autoNumber: "AMS"} },
        tex2jax: {
          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
          processEscapes: true
@@ -40,6 +41,8 @@ Template:	Prologue 1.0 by HTML5 UP
     <script type="text/javascript">
      $(document).ready(function(){
        // setupVisibilityToggle defined in base.js
+       setupVisibilityToggle("numbers1");
+       setupVisibilityToggle("mpgnounits");
        setupVisibilityToggle("table1");
        setupVisibilityToggle("table2");
      });
@@ -117,7 +120,160 @@ Template:	Prologue 1.0 by HTML5 UP
 	    <h2>Quantities</h2>
 	  </header>
 
-	  <p></p>
+	  <p>A quantity is a way of representing amount.  Because 5 cookies is different from 5 cookie crumbs, and both are different from 5 meters or 5 kilograms or 5°C, a quantity is more than just a number; it includes a unit.  See the following Table for examples of common units.</p>
+
+          <table class="data">
+            <caption>Table 1: Common SI Units Used in Physics.  The dimension of a quantity is the type of measurement.</caption>
+            <colgroup />
+            <colgroup />
+            <colgroup />
+            <colgroup />
+            <thead>
+              <tr>
+                <th scope="col">Dimension</th>
+                <th scope="col">Dimension Symbol</th>
+                <th scope="col">Unit</th>
+                <th scope="col">Unit Symbol</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Mass</td>
+                <td>$M$</td>
+                <td>kilogram</td>
+                <td>kg</td>
+              </tr>
+              <tr>
+                <td>Length</td>
+                <td>$L$</td>
+                <td>meter</td>
+                <td>m</td>
+              </tr>
+              <tr>
+                <td>Time</td>
+                <td>$T$</td>
+                <td>second</td>
+                <td>s</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <p>Think of a unit as a short line segment.  This is one meter.</p>
+          <canvas id="unitCanvas" width="110" height="30"></canvas> 
+          <p>And &ldquo;3.7&nbsp;m&rdquo; means 3 whole meter sticks laid end-to-end with 0.7 of a meter stick added to that.</p>
+          <canvas id="quantityCanvas" width="440" height="30"></canvas> 
+          <p>We're not saying that all units are lengths, just that it's a conventient way to picture them.  For instance, a good unit for a long car trip might be one hour (h).</p>
+          <canvas id="hourCanvas" width="110" height="30"></canvas> 
+          <p>If the car trip takes 5.4&nbsp;hours, we can show that too.</p>
+          <canvas id="hoursCanvas" width="660" height="30"></canvas> 
+          <h3>Conventions with Numbers</h3>
+          <p class="question">Are <strong>2</strong> and <strong>2.0</strong> the same or not the same? <a id="numbers1Q" href="#" class="button">I have an answer.</a> </p>
+          <script type="text/javascript">
+           // This script takes care of the graphics for the unit diagrams.
+
+           var unit_width = 100; // locally global setting
+           var height = 30; // locally global setting
+           // drawUnit draws one unit segment
+           var drawUnit = function(context, offset, label, fraction) {
+             var width = unit_width*fraction;
+             var text_vertical_offset = -5;
+             var tick_height = 20;
+             context.lineWidth=4;
+             context.fillStyle="#000000";
+             // left tick
+             context.moveTo(offset, height);
+             context.lineTo(offset, height-tick_height);
+             context.stroke();
+             // right tick
+             if (fraction == 1) {
+               context.moveTo(width+offset, height);
+               context.lineTo(width+offset, height-tick_height);
+               context.stroke();
+             }
+             // center line
+             context.moveTo(offset,height-tick_height/2);
+             context.lineTo(width+offset,height-tick_height/2);
+             context.stroke();
+             // label
+             context.font="20px sans-serif";
+             context.textAlign = "center";
+             if (fraction < 1) label = "" + fraction + " " + label;
+             context.fillText(label, width/2+offset, height - tick_height/2 + text_vertical_offset); 
+             
+             return 0;
+           };
+           // drawQuantity draws some number "amount" of unit segments
+           var drawQuantity = function(context, offset, label, amount) {
+             var n = Math.floor(amount);
+             var fraction = Math.round((amount-n)*10)/10; //round to the nearest 10th
+             for (var i=0; i<n; ++i) {
+               drawUnit(context, offset+unit_width*i, label, 1);
+             }
+             drawUnit(context, offset+unit_width*n, label, fraction);
+             return 0;
+           };
+
+           var unitContext = document.getElementById("unitCanvas").getContext("2d");
+           drawUnit(unitContext, 2, "m", 1);
+           var quantityContext = document.getElementById("quantityCanvas").getContext("2d");
+           drawQuantity(quantityContext, 2, "m", 3.7);
+           var hourContext = document.getElementById("hourCanvas").getContext("2d");
+           drawUnit(hourContext, 2, "h", 1);
+           var hoursContext = document.getElementById("hoursCanvas").getContext("2d");
+           drawQuantity(hoursContext, 2, "h", 5.4);
+
+          </script>
+
+          <div id="numbers1A" class="container,initiallyhidden">
+            <p class="answer">It may seem strange to say, but the best answer is that these are &ldquo;the same but not the same&rdquo;.  Certainly, they are the same mathematically, but they have a different meaning in science.</p>
+            <ul>
+              <li><strong>2</strong> announces itself as 2, not 1 or 3.</li>
+              <li><strong>2.0</strong> announces itself as 2.0, not 1.9 or 2.1.</li>
+            </ul>
+            <p>In short, the number 2.0 is more <em>precise</em> than 2.  We might also speak of 2.0 as having a higher precision than 2.  When taking data, you generally want to record all numbers with the same precision.</p>
+
+            <h3>Uncertainty</h3>
+            <p>However, there is a better way to talk about precision.  What if we wanted to report that an answer was between 1.8 and 2.2?  Reporting the value as 2.0 might lull the unwary unto thinking that the value is between 1.95 and 2.049̄, which are the values that round to 2.0.  We could, of course, just say that the values are between 1.8 and 2.2, but that's a bit wordy.  Science has invented a clever way of writing this, which is 2.0±0.2.  You might remember the plus-or-minus symbol &ldquo;±&rdquo; from its cameo in the quadratic formula from math class.  Essentially, it just means to compute it both ways.  $2.0-0.2=1.8$ and $2.0+0.2=2.2$, which are the ends of the interval.  You can think of 2.0±0.2 as meaning that while 2.0 is our best estimate of the measurement, it could be <em>as much as</em> 0.2 from this value.  The 0.2 part is our <em>uncertainty</em>.</p>
+            <p>This is all well and good, you might be saying, but how do I know what the uncertainty is for a measurement?  Since measurement uncertainty comes from two sources, the instrument and the thing being measured, there are two methods that can help, Least Count and Trials.</p>
+            <dl>
+              <dt>Least Count</dt>
+              <dd><p>When the thing being measured is easier to measure (e.g. because it's sitting still, keeping the same shape, easy to see, etc.), most of the uncertainty comes from the measurement instrument (e.g. ruler, stopwatch, scale, etc.).  The smallest division able to be read from the instrument is called its <em>least count</em>.</p>
+                <p>Unless you can estimate a tenth of the least count (i.e. to the nearest tenth of a division) on the measurement instrument, in this case, we will usually report the least count as our uncertainty.  For a standard meter stick, for instance, the least count is 1&nbsp;mm, or 0.01&nbsp;m.</p></dd>
+              <dt>Trials</dt>
+              <dd><p>When the thing being measured is harder to measure (e.g. because it's moving, changing shape, hard to see, etc.), most of the uncertainty comes from the difficulty of measuring that thing.  We can repeat the measurement and make a list of all the measurement.  When nothing is changed between measurements, these repeated measurements are called <em>trials</em>.</p>
+                <p>Suppose one carries out trials of a measurement and keeps a list, as just described.  One can search through the list to find the minimum and maximum values.  If these are far apart, there is a large uncertainty, whereas if they are close together, there is a small uncertainty in the measurement.  The value that we report will be the average of the trial measurements, and the uncertainty we report will be half the range of the trial measurements:
+                  \[ \begin{align*}
+&\text{value}\pm\text{uncertainty}=\\
+&\left(\genfrac{}{}{0pt}{}{\text{average of}}{\text{measurements}}\right)\pm\left(\frac{\text{maximum}-\text{minimum}}{2}\right) \end{align*} \]
+                </p>
+              </dd>
+            </dl>
+            <p class="todo">Add some interactive features to play with measurements set along a scale.</p>
+            <h4>Uncertainty and Units</h4>
+            <p>In this section, we dropped units on all quantities, but we really should have kept them.  A measurement of someone's mass might look like \( (62\pm1)\text{kg} \).  A height might be \( (147.5\pm0.5)\text{cm} \).</p>
+            <p>Finally, let's straighten out a few housekeeping notes.  We generally write the uncertainty to the same precision as the measured value and keep only one significant digit in the uncertainty.  For instance, \( (1.23\pm0.4310003)\text{m} \) makes little sense, but neither does  \( (1.23456789\pm0.4)\text{m} \).  There is no point in claiming to know either the value or uncertainty more precisely.  Further, for most of our purposes,  \( (1.234\pm0.431)\text{m} \)
+ makes just as little sense, for we will never be certain of the hundredths, let alone thousandths, of a meter.  It will be better to write \( (1.2\pm0.4)\text{m} \).</p>
+            <h3>Calculations with Units</h3>
+            <p>The first significant calculations that you make in this course will be rates, often those associated with the slope of a line.  It is a testament to your progress in mathematics that you can now find the slope of a line to be 14.73.  However, does that 14.73 pertain to the number of attacking chickens each second or your payment in dollars for every hour that you work?  If you have waited until the end of your calculation to interpret the meaning of 14.73, then alas!  It is too late!  You would have missed your opportunity to give meaning to your struggle and to check your calculations.</p>
+            <p>Even though the extra work in adding units to calculations is modest, I know that many will try to avoid it.  It's only natural, but then so is getting food poisoning after eating spoiled food.  I certainly wouldn't wish that on you either.  If even this won't turn your stomach from trying to perform calculations without units, consider the following calculation.
+              \[ \begin{equation} \frac{154567-154229}{9.753} = \frac{338}{9.753}=34.7 \label{mpgnounits}\end{equation} \]
+            </p>
+            <p class="question">What does the calculation in Equation&nbsp;\ref{mpgnounits} mean?  Since you laugh, I'll at least tell you that it has to do with driving a car.  <a id="mpgnounitsQ" class="button" href="#">Click after you've thought about it.</a></p>
+            <div id="mpgnounitsA" class="container,initiallyhidden">
+              <p class="answer">You might have gotten it on the first try, but just think about how much easier it would have been if someone had instead written:
+                \[ \begin{equation} \frac{154567\,\text{mi}-154229\,\text{mi}}{9.753\,\text{gal}} = \frac{338\,\text{mi}}{9.753\,\text{gal}}=\frac{34.7\,\text{mi}}{1\,\text{gal}} \label{mpgwithunits}\end{equation} \]
+                You might now be able to guess from Equation&nbsp;\ref{mpgwithunits} that &ldquo;mi&rdquo; is the unit abbreviation for &ldquo;miles&rdquo; and &ldquo;gal&rdquo; is the unit abbreviation for  &ldquo;gallons&rdquo;.  You might even realize that 154229&nbsp;miles and 154567&nbsp;miles are odometer readings.  You now know that for every 1&nbsp;gallon of gasoline used between the two odometer readings that this car can travel 34.7&nbsp;miles.  In this way, units give a quantity <em>meaning</em>.
+</p>
+            </div>
+            <h3>Calculations with Units and Uncertainty</h3>
+            <p>N.B. This section is intended for the advanced student, who will want to know how to compute the uncertainty of a calculation.</p>
+          </div>
 
 	  <footer>
 	  </footer>
@@ -285,8 +441,8 @@ Template:	Prologue 1.0 by HTML5 UP
 
       <!-- Copyright -->
       <div class="copyright">
-	<p>&copy; 2013 Brian Vancil. All rights reserved.</p>
 	<ul class="menu">
+	  <li>&copy; 2013 Brian Vancil. All rights reserved.</li>
 	  <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
 	  <li>Images: <a href="http://ineedchemicalx.deviantart.com">Felicia Simion</a></li>
 	</ul>
