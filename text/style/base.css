@@ -17,8 +17,50 @@
 	color: #000;
 	text-decoration: underline;
     }
+    nav, aside {
+	display: none;
+    }
+    section, div.container {
+	background: none;
+    }
+    @page {
+	margin: 4cm;
+    }
+    h1, h2, h3, h4, h5, h6 {
+	page-break-after: avoid;
+    }
+    img {
+	max-width: 100% !important;
+    }
+    ul, ol, img {
+	page-break-inside: avoid;
+    }
+    a {
+	font-weight: bolder;
+	text-decoration: none;
+    }
+    a[href^=http]:after {
+	content: " <" attr(href) "> ";
+    }
+    /* CSS4 begin */
+    $a:after > img {
+	content: "";
+    }
+    a:not(:local-link):after {
+	content:" <" attr(href) "> ";
+    }
+    /* CSS4 end */
+    /* TODO:
+     * See http://coding.smashingmagazine.com/2013/03/08/tips-tricks-print-style-sheets/
+     */
+    
 }
-
+@media print and (color) {
+   * {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+   }
+}
 @media screen {
     body {
 	/* font-family: Verdana, Helvetica, Arial, sans-serif; */
@@ -84,7 +126,7 @@
     }
 
     .initiallyhidden {
-	/*display:none; /* comment out this line while debugging */
+	display:none; /* comment out this line while debugging */
     }
 }
 
@@ -165,4 +207,37 @@ dt {
 .todo {
     background-color: yellow;
     border: 5px solid red;
+}
+
+/* Modifications to the original color scheme */
+/*
+Useful colors:
+002366 royal blue
+4169E1 royal blue (web)
+CC5500 burnt orange
+C0C0C0 silver
+0000FF primary blue
+FFFFFF white
+F28500 true tangerine
+*/
+.button {
+    background-color: #002366;
+
+}
+.button:hover {
+    background-color: #4169E1;
+}
+div.plot { 
+    width: 600px;
+    height: 500px; /* set to width/phi, where phi is the golden ratio */
+
+}
+div.jqplot-target {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    font-size: 1.2em;
+}
+table.jqplot-table-legend {
+    width: auto;
 }

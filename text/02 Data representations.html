@@ -16,6 +16,7 @@ Template:	Prologue 1.0 by HTML5 UP
     <script src="js/skel.min.js"></script>
     <script src="js/skel-panels.min.js"></script>
     <script src="js/init.js"></script>
+    <script src="js/less.min.js"></script>
     <noscript>
       <link rel="stylesheet" href="css/skel-noscript.css" />
       <link rel="stylesheet" href="css/style.css" />
@@ -34,18 +35,163 @@ Template:	Prologue 1.0 by HTML5 UP
      });
     </script>
     <script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script language="javascript" type="text/javascript" src="jqplot/src/jquery.jqplot.js"></script>
+    <script language="javascript" type="text/javascript" src="jqplot/src/plugins/jqplot.canvasTextRenderer.js"></script>
+    <script language="javascript" type="text/javascript" src="jqplot/src/plugins/jqplot.canvasAxisLabelRenderer.js"></script>
+    <script language="javascript" type="text/javascript" src="jqplot/src/plugins/jqplot.highlighter.js"></script>
+    <script language="javascript" type="text/javascript" src="jqplot/src/plugins/jqplot.cursor.js"></script>
+    <script language="javascript" type="text/javascript" src="jqplot/src/plugins/jqplot.trendline.js"></script>
+    <script language="javascript" type="text/javascript" src="jqplot/src/plugins/jqplot.dragable.js"></script>
+    <link rel="stylesheet" type="text/css" href="jqplot/src/jquery.jqplot.css" />
     <style type="text/css">
      
     </style>
     <script src="script/base.js"></script>
     <script type="text/javascript">
+     var globalVisibilityToggles = ["numbers1", "mpgnounits", "table1", "table2"];
+     
      $(document).ready(function(){
        // setupVisibilityToggle defined in base.js
-       setupVisibilityToggle("numbers1");
-       setupVisibilityToggle("mpgnounits");
-       setupVisibilityToggle("table1");
-       setupVisibilityToggle("table2");
+       for(var i=0; i<globalVisibilityToggles.length; ++i) {
+         setupVisibilityToggle(globalVisibilityToggles[i]);
+       }
+       // flot graphs
+       $.jqplot.config.enablePlugins = true;
+       var replot = function(jqplot, options) {
+         var dummy_fcn = function(e) {
+           e.preventDefault();
+           jqplot.replot(options);
+         }
+         return dummy_fcn;
+       }
+       var M_data = [[
+         [55, 46.6],
+         [60, 39.4],
+         [65, 36.6],
+         [70, 31.3],
+         [75, 27.5],
+       ]];
+       var M_options = {
+         title: 'Gas Mileage Versus Maximum Speed Driven for Round Trips Between Lawrence, KS And Sumner Academy of Arts &amp; Science',
+         axes: {
+           xaxis: {
+             label: 'Maximum Speed Driven / (mi/h)',
+             labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+             min: 0,
+           },
+           yaxis: {
+             label: 'Gas Mileage / (mi/gal)',
+             labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+             min: 0,
+           }
+         },
+         series: [{
+           label: 'experimental data',
+           color: '#4169E1',
+           showMarker: true,
+           showLine: false,
+         }],
+         highlighter: {
+           show: true,
+           sizeAdjust: 8,
+         },
+         cursor: {
+           show: false,
+           zoom: false,
+         },
+       };
+       var jqplot1=$.jqplot('plot1', M_data, M_options);
+       $('#plot1reset').click(replot(jqplot1,M_options));
+       var G_data = [[
+         [55, 2.15],
+         [60, 2.54],
+         [65, 2.74],
+         [70, 3.19],
+         [75, 3.64],
+       ]];
+       var G_options = {
+         title: 'Mile Gasage Versus Maximum Speed Driven for Round Trips Between Lawrence, KS And Sumner Academy of Arts &amp; Science',
+         axes: {
+           xaxis: {
+             label: 'Maximum Speed Driven / (mi/h)',
+             labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+             min: 0,
+           },
+           yaxis: {
+             label: 'Mile Gasage / (gal/(100 mi))',
+             labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+             min: 0,
+           }
+         },
+         series: [{
+           label: 'experimental data',
+           color: '#4169E1',
+           showMarker: true,
+           showLine: false,
+         }],
+         highlighter: {
+           show: true,
+           sizeAdjust: 8,
+         },
+         cursor: {
+           show: false,
+           zoom: false,
+         },
+       };
+       var jqplot2=$.jqplot('plot2', G_data, G_options);
+       $('#plot2reset').click(replot(jqplot2,G_options));
      });
+       var P_data = [[
+         [1,   3],
+         [2,  12],
+         [3,  27],
+         [4,  48],
+         [5,  75],
+         [6, 108],
+         [7, 147],
+         [8, 192]
+       ]];
+       var P_options = {
+         title: 'Gas Mileage Versus Maximum Speed Driven for Round Trips Between Lawrence, KS And Sumner Academy of Arts &amp; Science',
+         axes: {
+           xaxis: {
+             label: 'Maximum Speed Driven / (mi/h)',
+             labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+             min: 0,
+           },
+           yaxis: {
+             label: 'Gas Mileage / (mi/gal)',
+             labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+             min: 0,
+           }
+         },
+         series: [{
+           label: 'experimental data',
+           color: '#4169E1',
+           showMarker: true,
+           showLine: false,
+           trendline: {
+             show: true,
+             label: 'best-fit straight line',
+             type: 'linear',
+             renderer: renderer = new $.jqplot.LineRenderer(),
+             color: '#CC5500',
+           },
+         }],
+         highlighter: {
+           show: true,
+           sizeAdjust: 8,
+         },
+         cursor: {
+           show: false,
+           zoom: false,
+         },
+         legend: {
+           show: true,
+           location: 'e',
+           placement: 'outsideGrid',
+         },
+       };
     </script>
   </head>
   <body>
@@ -107,6 +253,7 @@ Template:	Prologue 1.0 by HTML5 UP
 
 	  <footer>
 	    <a href="#quantities" class="button scrolly">I'm ready.  Tell me about quantities!</a>
+            <a href="#" id="showalltoggles" class="button">I've already done this bit.  Just show me all of it.</a>
 	  </footer>
 
 	</div>
@@ -230,7 +377,7 @@ Template:	Prologue 1.0 by HTML5 UP
 
           </script>
 
-          <div id="numbers1A" class="container,initiallyhidden">
+          <div id="numbers1A" class="container initiallyhidden">
             <p class="answer">It may seem strange to say, but the best answer is that these are &ldquo;the same but not the same&rdquo;.  Certainly, they are the same mathematically, but they have a different meaning in science.</p>
             <ul>
               <li><strong>2</strong> announces itself as 2, not 1 or 3.</li>
@@ -265,7 +412,7 @@ Template:	Prologue 1.0 by HTML5 UP
               \[ \begin{equation} \frac{154567-154229}{9.753} = \frac{338}{9.753}=34.7 \label{mpgnounits}\end{equation} \]
             </p>
             <p class="question">What does the calculation in Equation&nbsp;\ref{mpgnounits} mean?  Since you laugh, I'll at least tell you that it has to do with driving a car.  <a id="mpgnounitsQ" class="button" href="#">Click after you've thought about it.</a></p>
-            <div id="mpgnounitsA" class="container,initiallyhidden">
+            <div id="mpgnounitsA" class="container initiallyhidden">
               <p class="answer">You might have gotten it on the first try, but just think about how much easier it would have been if someone had instead written:
                 \[ \begin{equation} \frac{154567\,\text{mi}-154229\,\text{mi}}{9.753\,\text{gal}} = \frac{338\,\text{mi}}{9.753\,\text{gal}}=\frac{34.7\,\text{mi}}{1\,\text{gal}} \label{mpgwithunits}\end{equation} \]
                 You might now be able to guess from Equation&nbsp;\ref{mpgwithunits} that &ldquo;mi&rdquo; is the unit abbreviation for &ldquo;miles&rdquo; and &ldquo;gal&rdquo; is the unit abbreviation for  &ldquo;gallons&rdquo;.  You might even realize that 154229&nbsp;miles and 154567&nbsp;miles are odometer readings.  You now know that for every 1&nbsp;gallon of gasoline used between the two odometer readings that this car can travel 34.7&nbsp;miles.  In this way, units give a quantity <em>meaning</em>.
@@ -331,7 +478,7 @@ Template:	Prologue 1.0 by HTML5 UP
           </table>
           <p class="question">What's wrong with it?  Take a moment to come up with some ideas.  When you do, <a id="table1Q" href="#" class="button">click to continue.</a></p>
 
-          <div id="table1A" class="container,initiallyhidden">
+          <div id="table1A" class="container initiallyhidden">
             <p class="answer">We have no idea what these numbers mean, either what they describe or in what units they are measured.  Even more, we have no idea how they are related.  The following is a better way of constructing such a table.</p>
             <table class="data">
               <caption>Table 2: Data for round trips from Lawrence, KS to Sumner Academy of Arts &amp; Science driven at different maximum speeds.</caption>
@@ -342,11 +489,11 @@ Template:	Prologue 1.0 by HTML5 UP
               <colgroup />
               <thead>
                 <tr>
-                  <th scope="col">Maximum speed <span class="solidus">/</span> mi/h</th>
-                  <th scope="col">Distance driven <span class="solidus">/</span> mi</th>
-                  <th scope="col">Gasoline used <span class="solidus">/</span> gal</th>
-                  <th scope="col">Gas mileage <span class="solidus">/</span> mi/gal</th>
-                  <th scope="col">Mile gasage <span class="solidus">/</span> gal/100mi</th>
+                  <th scope="col">Maximum Speed <span class="solidus">/</span> (mi/h)</th>
+                  <th scope="col">Distance Driven <span class="solidus">/</span> mi</th>
+                  <th scope="col">Volume of Gasoline Used <span class="solidus">/</span> gal</th>
+                  <th scope="col">Gas Mileage <span class="solidus">/</span> (mi/gal)</th>
+                  <th scope="col">Mile Gasage <span class="solidus">/</span> (gal/(100mi))</th>
                 </tr>
               </thead>
               <tbody>
@@ -389,8 +536,101 @@ Template:	Prologue 1.0 by HTML5 UP
             </table>
             
             <p class="question">Do you have any critiques of this?  Take a moment to come up with some ideas.  When you do, <a id="table2Q" href="#" class="button">click to continue.</a></p>
-            <div id="table2A" class="container,initiallyhidden">
-              <p class="answer">Since you've learned about uncertainty, you may wonder why it wasn't listed.  Also, the numbers are not written to the same precision.  I know that my spedometer is as much as 2 mph off, and the "<span class="keyword" title="smallest division reported by the measuring instrument">least count"</span> on my odometer is 0.1 miles.</p>
+            <div id="table2A" class="container initiallyhidden">
+              <p class="answer">Since you've learned about uncertainty, you may wonder why it wasn't listed.  Also, the numbers are not written to the same precision.  I know that my spedometer is as much as 2 mph off, and the <em class="keyword" title="smallest division reported by the measuring instrument">least count</em> on my odometer is 0.1 miles.</p>
+              <p class="answer">You may have also noticed that this data gives us no idea of the relationships between the variables.  How is "Mile Gasage" defined?  Doesn't "Gas Mileage" depend on the "Distance Driven" and "Gasoline Used"?  We need some way to show this, so it will be helpful to choose mathematical symbols for all the variables.</p>
+              <table class="data">
+                <caption>Table 3: Data for round trips from Lawrence, KS to Sumner Academy of Arts &amp; Science driven at different maximum speeds.</caption>
+                <colgroup />
+                <colgroup />
+                <colgroup />
+                <colgroup />
+                <colgroup />
+                <thead>
+                  <tr>
+                    <th scope="col">Maximum Speed</th>
+                    <th scope="col">Distance Driven</th>
+                    <th scope="col">Volume of Gasoline Used</th>
+                    <th scope="col">Gas Mileage</th>
+                    <th scope="col">Mile Gasage</th>
+                  </tr>
+                  <tr>
+                    <th scope="col">$v_{\text{max}}$ <span class="solidus">/</span> (mi/h)</th>
+                    <th scope="col">$d$ <span class="solidus">/</span> mi</th>
+                    <th scope="col">$V$ <span class="solidus">/</span> gal</th>
+                    <th scope="col">$M$ <span class="solidus">/</span> (mi/gal)</th>
+                    <th scope="col">$G$ <span class="solidus">/</span> (gal/(100mi))</th>
+                  </tr>
+                  <tr>
+                    <th scope="col">&#x00B1; 2</th>
+                    <th scope="col">&#x00B1; 0.1</th>
+                    <th scope="col">&#x00B1; 0.001</th>
+                    <th scope="col">&#x00B1; </th>
+                    <th scope="col">&#x00B1;</th>
+                  </tr>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col">$M=\frac{d}{V}$</th>
+                    <th scope="col">$G=\frac{1}{M}$</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>55</td>
+                    <td>85.1</td>
+                    <td>1.826</td>
+                    <td>46.6</td>
+                    <td>2.15</td>
+                  </tr>
+                  <tr>
+                    <td>60</td>
+                    <td>85</td>
+                    <td>2.156</td>
+                    <td>39.4</td>
+                    <td>2.54</td>
+                  </tr>
+                  <tr>
+                    <td>65</td>
+                    <td>84</td>
+                    <td>2.298</td>
+                    <td>36.6</td>
+                    <td>2.74</td>
+                  </tr>
+                  <tr>
+                    <td>70</td>
+                    <td>83.9</td>
+                    <td>2.678</td>
+                    <td>31.3</td>
+                    <td>3.19</td>
+                  </tr>
+                  <tr>
+                    <td>75</td>
+                    <td>84.3</td>
+                    <td>3.065</td>
+                    <td>27.5</td>
+                    <td>3.64</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h4>Example Calculation for The First Data Point</h4>
+              <p>Since the Distance Driven is $d=85.1\pm0.1\text{ mi}$ and the Volume of Gasoline Used is $V=1.826\pm0.001\text{ gal}$, the Gas Mileage $M$ may be calculated as follows.
+\begin{align}
+M =& \frac{d}{V} \\
+=& \frac{85.1\text{ mi}}{1.826\pm0.001\text{ gal}} \\
+=& \frac{46.6\text{ mi}}{1\text{ gal}} \\
+=& 46.6\text{ mi}/\text{gal}
+\end{align}
+                The Mile Gasage $G$ is then given by the following.
+\begin{align}
+G =& \frac{1}{M} \\
+=& \frac{1}{\frac{46.6\text{ mi}}{1\text{ gal}}} \\
+=& \frac{1\text{ gal}}{46.6\text{ mi}} \\
+=& \frac{0.0215\text{ gal}}{1\text{ mi}}\cdot\frac{100}{100} \\
+=& \frac{2.15\text{ gal}}{100\text{ mi}} \\
+=& 2.15\text{ mi}/(100\text{ gal})
+\end{align}</p>
             </div>
           </div>
 	  <footer>
@@ -405,6 +645,12 @@ Template:	Prologue 1.0 by HTML5 UP
 	  <header>
 	    <h2>Scatter plots (graphs)</h2>
 	  </header>
+          
+          <div id="plot1" class="plot"></div>
+          <a id="plot1reset" class="button" href="#">Reset scatter plot.</a>
+
+          <div id="plot2" class="plot"></div>
+          <a id="plot2reset" class="button" href="#">Reset scatter plot.</a>
 
 	  <footer></footer>
         </div>
@@ -418,6 +664,9 @@ Template:	Prologue 1.0 by HTML5 UP
 	    <h2>Mathematical models</h2>
 	  </header>
 
+          <div id="plot3" class="plot"></div>
+          <a id="plot3reset" class="button" href="#">Reset scatter plot.</a>
+
           <footer></footer>
         </div>
       </section>
@@ -429,6 +678,12 @@ Template:	Prologue 1.0 by HTML5 UP
 	  <header>
 	    <h2>Linearizing graphs</h2>
 	  </header>
+
+          <div id="plot4" class="plot"></div>
+          <a id="plot4reset" class="button" href="#">Reset scatter plot.</a>
+
+          <div id="plot5" class="plot"></div>
+          <a id="plot5reset" class="button" href="#">Reset scatter plot.</a>
 
           <footer></footer>
         </div>
