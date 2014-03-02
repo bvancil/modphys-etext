@@ -24,6 +24,7 @@ F28500 true tangerine
 @todo-border-color: red;
 @button-background-color: #002366; /* royal blue */
 @button-hover-color: #4169E1; /* royal blue (web) */
+
 @media print {
     body {
 	font-family: Baskerville, Baskervald, Garamond, serif;
@@ -66,12 +67,12 @@ F28500 true tangerine
 	content: " <" attr(href) "> ";
     }
     /* CSS4 begin */
-    $a:after > img {
+/*    $a:after > img {
 	content: "";
     }
     a:not(:local-link):after {
 	content:" <" attr(href) "> ";
-    }
+    }*/
     /* CSS4 end */
     /* TODO:
      * See http://coding.smashingmagazine.com/2013/03/08/tips-tricks-print-style-sheets/
@@ -118,7 +119,7 @@ F28500 true tangerine
     h1, h2, h3, h4, h5, h6 {
 	/* font-family: Baskerville, Baskervald, serif; */
 	font-family: Optima, Verdana, Helvetica, Arial, sans-serif; 
-	font-weight: normal
+	font-weight: normal;
 	text-align: left;
 	border: 0;
 	margin: 0;
@@ -134,7 +135,7 @@ F28500 true tangerine
 	position: relative;
     }	
     h2 {
-	color: @h2-color
+	color: @h2-color;
 	font-size: 200%;
 	height: 200%;
 	margin: 8px 0 2px;
@@ -193,12 +194,12 @@ tr:first-child {
 tr:last-child {
     border-bottom: 1px solid #000;
 }
-table.data < th {
+table.data th {
     align: center;
     valign: middle;
     padding: .65em;
 }
-table.data < td {
+table.data td {
     padding: .65em;
 }
 .solidus {
@@ -215,15 +216,19 @@ table.data < td {
 .question {
     border-left: thick solid #CC5500;
 }
+/* This is set by JavaScript, since we want html, not text.
 .question:before {
-    /* This is set by JavaScript, since we want html, not text. */
+    
 }
+*/
 .answer {
     border-left: thick solid #C0C0C0;
 }
+/* This is set by JavaScript, since we want html, not text.
 .answer: before {
-    /* This is set by JavaScript, since we want html, not text. */
+
 }
+*/
 dt {
     font-weight: bold;
 }

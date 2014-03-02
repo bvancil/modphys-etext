@@ -1,214 +1,5 @@
 /* Generic fonts and boxmodel */
 /* Portions adapted from https://github.com/Simbul/baker/blob/master/books/a-study-in-scarlet/css/book.css Copyright (C) 2011 by Davide S. Casali <folletto AT gmail DOT com> */
-
-@media print {
-    body {
-	font-family: Baskerville, Baskervald, Garamond, serif;
-	font-size: 12px;
-    }
-    h1, h2, h3, h4, h5, h6 {
-	font-family: Optima, sans-serif;
-	font-weight: normal;
-	border: 0;
-	margin: 0;
-	padding: 0;
-    }
-    a {
-	color: #000;
-	text-decoration: underline;
-    }
-    nav, aside {
-	display: none;
-    }
-    section, div.container {
-	background: none;
-    }
-    @page {
-	margin: 4cm;
-    }
-    h1, h2, h3, h4, h5, h6 {
-	page-break-after: avoid;
-    }
-    img {
-	max-width: 100% !important;
-    }
-    ul, ol, img {
-	page-break-inside: avoid;
-    }
-    a {
-	font-weight: bolder;
-	text-decoration: none;
-    }
-    a[href^=http]:after {
-	content: " <" attr(href) "> ";
-    }
-    /* CSS4 begin */
-    $a:after > img {
-	content: "";
-    }
-    a:not(:local-link):after {
-	content:" <" attr(href) "> ";
-    }
-    /* CSS4 end */
-    /* TODO:
-     * See http://coding.smashingmagazine.com/2013/03/08/tips-tricks-print-style-sheets/
-     */
-    
-}
-@media print and (color) {
-   * {
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-   }
-}
-@media screen {
-    body {
-	/* font-family: Verdana, Helvetica, Arial, sans-serif; */
-	font-family: Baskerville, Baskervald, "Gentium Book Basic", "Gentium Basic", "Gentium", serif;
-	font-size: 140%;
-	background: #fff;
-	font-color: #000;
-	margin: 0;
-	padding: 0;
-    }
-
-    a {
-	color: #69f;
-    }
-
-    p, ul, ol {
-	font-size: 100%;
-	line-height: 170%;
-    }
-
-    p { /* These settings are here to improve readability. */
-	text-align: justify;
-	max-width: 550px; /* adjust to be 50-60 characters */
-	margin-left: auto;
-	margin-right: auto;
-    }
-    
-    body { /* More text-contrast needed */
-	color: #000;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-	/* font-family: Baskerville, Baskervald, serif; */
-	font-family: Optima, Verdana, Helvetica, Arial, sans-serif; 
-	font-weight: normal
-	text-align: left;
-	border: 0;
-	margin: 0;
-	padding: 0;
-	font-size: 150%;
-    }
-
-    h1 {
-	border-bottom: 2px solid #f69;
-	color: #f69;
-	font-size: 250%;
-	height: 250%;
-	position: relative;
-    }	
-    h2 {
-	color: #9f6
-	font-size: 200%;
-	height: 200%;
-	margin: 8px 0 2px;
-	padding: 5px 0 2px;
-    }
-
-    section div.container > p {
-	text-align: justify;
-	max-width: 550px; /* adjust to be 50-60 characters */
-	margin-left: auto;
-	margin-right: auto;
-    }
-
-    .initiallyhidden {
-	display:none; /* comment out this line while debugging */
-    }
-}
-
-
-table.data {
-    border-collapse: collapse;
-}
-table.data caption {
-    font-size: larger;
-    margin: 1em auto;
-}
-table.data colgroup {
-    align: center;
-    valign: middle;
-}
-table.data thead {
-    align: center;
-    valign: middle;
-    background: inherit;
-    border-top: 2px solid #000;
-    border-bottom: 1px solid #000;
-    font-weight: bold;
-}
-table.data tfoot {
-    align: center;
-    valign: middle;
-}
-table.data tbody {
-    align: center;
-    valign: middle;
-}
-tbody tr:nth-child(odd) {
-    background: #c0c0c0;
-}
-tbody tr:nth-child(even) {
-    background: inherit;
-}
-tr:first-child {
-    border-top: 1px solid #000;
-}
-tr:last-child {
-    border-bottom: 1px solid #000;
-}
-table.data < th {
-    align: center;
-    valign: middle;
-    padding: .65em;
-}
-table.data < td {
-    padding: .65em;
-}
-.solidus {
-    font-size: 120%;
-    color: #4169E1; /* royal blue (web) */
-}
-.bigletter {
-    font-size: 300%;
-    color: #CC5500;
-}
-/* In-text questions and answers:
-   For a text-feature with a short name of "xyz", the id on the answer-toggling button is "xyzQ" and the id on the part to be shown is "xyzA", usually a "div.container", which has class "initiallyhidden".
-   To indicate these question/answer self-questioning features, we use the classes "question" and "answer". The class "question" contains the full question, but the class "answer" only contains the specific answer to the question, not necessarily everything that needs to be shown later." */
-.question {
-    border-left: thick solid #CC5500;
-}
-.question:before {
-    /* This is set by JavaScript, since we want html, not text. */
-}
-.answer {
-    border-left: thick solid #C0C0C0;
-}
-.answer: before {
-    /* This is set by JavaScript, since we want html, not text. */
-}
-dt {
-    font-weight: bold;
-}
-.todo {
-    background-color: yellow;
-    border: 5px solid red;
-}
-
 /* Modifications to the original color scheme */
 /*
 Useful colors:
@@ -220,24 +11,252 @@ C0C0C0 silver
 FFFFFF white
 F28500 true tangerine
 */
-.button {
-    background-color: #002366;
-
+/* royal blue (web) */
+/* royal blue */
+/* royal blue (web) */
+@media print {
+  body {
+    font-family: Baskerville, Baskervald, Garamond, serif;
+    font-size: 12px;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: Optima, sans-serif;
+    font-weight: normal;
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+  a {
+    color: #000;
+    text-decoration: underline;
+  }
+  nav,
+  aside {
+    display: none;
+  }
+  section,
+  div.container {
+    background: none;
+  }
+  @page {
+    margin: 4cm;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    page-break-after: avoid;
+  }
+  img {
+    max-width: 100% !important;
+  }
+  ul,
+  ol,
+  img {
+    page-break-inside: avoid;
+  }
+  a {
+    font-weight: bolder;
+    text-decoration: none;
+  }
+  a[href^=http]:after {
+    content: " <" attr(href) "> ";
+  }
+  /* CSS4 begin */
+  /*    $a:after > img {
+	content: "";
+    }
+    a:not(:local-link):after {
+	content:" <" attr(href) "> ";
+    }*/
+  /* CSS4 end */
+  /* TODO:
+     * See http://coding.smashingmagazine.com/2013/03/08/tips-tricks-print-style-sheets/
+     */
 }
-.button:hover {
-    background-color: #4169E1;
+@media print and (color) {
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 }
-div.plot { 
-    width: 600px;
-    height: 500px; /* set to width/phi, where phi is the golden ratio */
-
-}
-div.jqplot-target {
+@media screen {
+  body {
+    /* font-family: Verdana, Helvetica, Arial, sans-serif; */
+    font-family: Baskerville, Baskervald, "Gentium Book Basic", "Gentium Basic", "Gentium", serif;
+    font-size: 140%;
+    background: #ffffff;
+    font-color: #000000;
+    margin: 0;
+    padding: 0;
+  }
+  a {
+    color: #6699ff;
+  }
+  p,
+  ul,
+  ol {
+    font-size: 100%;
+    line-height: 170%;
+  }
+  p {
+    /* These settings are here to improve readability. */
+    text-align: justify;
+    max-width: 550px;
+    /* adjust to be 50-60 characters */
     margin-left: auto;
     margin-right: auto;
+  }
+  body {
+    /* More text-contrast needed */
+    color: #000000;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    /* font-family: Baskerville, Baskervald, serif; */
+    font-family: Optima, Verdana, Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    text-align: left;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 150%;
+  }
+  h1 {
+    border-bottom: 2px solid #ff6699;
+    color: #ff6699;
+    font-size: 250%;
+    height: 250%;
     position: relative;
-    font-size: 1.2em;
+  }
+  h2 {
+    color: #99ff66;
+    font-size: 200%;
+    height: 200%;
+    margin: 8px 0 2px;
+    padding: 5px 0 2px;
+  }
+  section div.container > p {
+    text-align: justify;
+    max-width: 550px;
+    /* adjust to be 50-60 characters */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .initiallyhidden {
+    display: none;
+    /* comment out this line while debugging */
+  }
+}
+table.data {
+  border-collapse: collapse;
+}
+table.data caption {
+  font-size: larger;
+  margin: 1em auto;
+}
+table.data colgroup {
+  align: center;
+  valign: middle;
+}
+table.data thead {
+  align: center;
+  valign: middle;
+  background: inherit;
+  border-top: 2px solid #000;
+  border-bottom: 1px solid #000;
+  font-weight: bold;
+}
+table.data tfoot {
+  align: center;
+  valign: middle;
+}
+table.data tbody {
+  align: center;
+  valign: middle;
+}
+tbody tr:nth-child(odd) {
+  background: #c0c0c0;
+}
+tbody tr:nth-child(even) {
+  background: inherit;
+}
+tr:first-child {
+  border-top: 1px solid #000;
+}
+tr:last-child {
+  border-bottom: 1px solid #000;
+}
+table.data th {
+  align: center;
+  valign: middle;
+  padding: .65em;
+}
+table.data td {
+  padding: .65em;
+}
+.solidus {
+  font-size: 120%;
+  color: #4169e1;
+}
+.bigletter {
+  font-size: 300%;
+  color: #cc5500;
+}
+/* In-text questions and answers:
+   For a text-feature with a short name of "xyz", the id on the answer-toggling button is "xyzQ" and the id on the part to be shown is "xyzA", usually a "div.container", which has class "initiallyhidden".
+   To indicate these question/answer self-questioning features, we use the classes "question" and "answer". The class "question" contains the full question, but the class "answer" only contains the specific answer to the question, not necessarily everything that needs to be shown later." */
+.question {
+  border-left: thick solid #CC5500;
+}
+/* This is set by JavaScript, since we want html, not text.
+.question:before {
+    
+}
+*/
+.answer {
+  border-left: thick solid #C0C0C0;
+}
+/* This is set by JavaScript, since we want html, not text.
+.answer: before {
+
+}
+*/
+dt {
+  font-weight: bold;
+}
+.todo {
+  background-color: #ffff00;
+  border: 5px solid #ff0000;
+}
+.button {
+  background-color: #002366;
+}
+.button:hover {
+  background-color: #4169e1;
+}
+div.plot {
+  width: 600px;
+  height: 500px;
+  /* set to width/phi, where phi is the golden ratio */
+}
+div.jqplot-target {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  font-size: 1.2em;
 }
 table.jqplot-table-legend {
-    width: auto;
+  width: auto;
 }
